@@ -1,17 +1,14 @@
 /**
  * @description Before trying to code it in Java I'm doing it in this
+ * @author LeviDuncanPixel
  */
 
 const canvas = document.querySelector("#canvas");
 const context = canvas.getContext("2d");
 
-function draw() {
+function drawBG() {
 	context.fillStyle = "#000";
 	context.fillRect(0, 0, canvas.width, canvas.height);
-	// Vector.makeVector(deg, canvas.height * 0.25).draw();
-	// vector = Vector.makeVector(0, 100, Point.centerPoint);
-	// console.log(vector);
-	// vector.draw();
 }
 
 canvas.width = document.body.clientWidth;
@@ -90,16 +87,6 @@ class Vector {
 
 		var endX = start.x + length * Math.sin(rotRads);
 		var endY = start.y - length * Math.cos(rotRads);
-		// console.log(
-		// 	`${endX}: ${start.x} + ${length}: ${
-		// 		length * Math.sin(rotRads) + start.x
-		// 	}: ${Math.sin(rotRads)}`
-		// );
-		// console.log(
-		// 	`${endY}: ${start.y} + ${length}: ${
-		// 		length * Math.cos(rotRads) + start.y
-		// 	}: ${Math.cos(rotRads)}`
-		// );
 
 		const endPoint = new Point(endX, endY);
 
@@ -119,27 +106,25 @@ class Vector {
 	}
 }
 
-point2 = new Point(canvas.width * 0.75, canvas.height * 0.75);
-
-// vector1 = new Vector(Point.centerPoint, point2);
-
 secFrame = 0;
 minRot = 1;
 undo = true;
 hourRot = 0;
 
 setInterval(() => {
-	draw();
+	drawBG();
 	Vector.makeVector(
 		hourRot / 100,
 		canvas.height * 0.25 * 0.5,
 		Point.centerPoint
 	).draw("#FF00CC");
+
 	Vector.makeVector(
 		minRot / 100,
 		canvas.height * 0.25 * 0.75,
 		Point.centerPoint
 	).draw("#CCFF00");
+
 	Vector.makeVector(
 		secFrame / 10,
 		canvas.height * 0.25,
@@ -147,9 +132,11 @@ setInterval(() => {
 	).draw("#00CCFF");
 
 	secFrame++;
+
 	if (secFrame % 3600 == 0) {
 		secFrame = 0;
 	}
+
 	if (secFrame % 60 == 0) {
 		if (undo == true) {
 			minRot--;
@@ -157,11 +144,8 @@ setInterval(() => {
 		}
 		minRot += 6;
 	}
+
 	if (minRot % 3600 == 0) {
 		hourRot += 6;
 	}
-	console.log(`${secFrame}: ${minRot}: ${hourRot}`);
-	// if (secFrame % 6 == 0) {
-	// minRot += 0.1;
-	// }
-}, 1);
+}, 1000 / 6);
