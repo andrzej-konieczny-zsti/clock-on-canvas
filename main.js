@@ -113,11 +113,12 @@ hourRot = 0;
 
 setInterval(() => {
 	drawBG();
+
 	Vector.makeVector(
-		hourRot / 100,
-		canvas.height * 0.25 * 0.5,
+		secFrame / 10,
+		canvas.height * 0.25,
 		Point.centerPoint
-	).draw("#FF00CC");
+	).draw("#00CCFF");
 
 	Vector.makeVector(
 		minRot / 100,
@@ -126,10 +127,10 @@ setInterval(() => {
 	).draw("#CCFF00");
 
 	Vector.makeVector(
-		secFrame / 10,
-		canvas.height * 0.25,
+		hourRot / 100,
+		canvas.height * 0.25 * 0.5,
 		Point.centerPoint
-	).draw("#00CCFF");
+	).draw("#FF00CC");
 
 	secFrame++;
 
@@ -137,7 +138,7 @@ setInterval(() => {
 		secFrame = 0;
 	}
 
-	if (secFrame % 60 == 0) {
+	if (secFrame % 60 == 0 || secFrame % 60 == 1) {
 		if (undo == true) {
 			minRot--;
 			undo = false;
@@ -148,4 +149,4 @@ setInterval(() => {
 	if (minRot % 3600 == 0) {
 		hourRot += 6;
 	}
-}, 1000 / 6);
+}, 1000 / 60);
