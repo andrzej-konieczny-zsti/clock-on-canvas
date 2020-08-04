@@ -1,7 +1,10 @@
 /**
  * @description Before trying to code it in Java I'm doing it in this
  * @author LeviDuncanPixel
+ * @package io.github.leviduncanpixel.clock-on-canvas
+ * @description JS had problems so here's an empty class
  */
+class Clock {}
 
 const canvas = document.querySelector("#canvas");
 const context = canvas.getContext("2d");
@@ -138,11 +141,12 @@ setInterval(() => {
 		secFrame = 0;
 	}
 
-	if (secFrame % 60 == 0 || secFrame % 60 == 1) {
-		if (undo == true) {
-			minRot--;
-			undo = false;
-		}
+	if (undo == true) {
+		minRot--;
+		undo = false;
+	}
+
+	if (secFrame % 60 == 0) {
 		minRot += 6;
 	}
 
