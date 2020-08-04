@@ -110,9 +110,9 @@ class Vector {
 }
 
 secFrame = 0;
-minRot = 1;
-undo = true;
-hourRot = 0;
+// minRot = 1;
+// undo = true;
+// hourRot = 0;
 
 setInterval(() => {
 	drawBG();
@@ -124,33 +124,32 @@ setInterval(() => {
 	).draw("#00CCFF");
 
 	Vector.makeVector(
-		minRot / 100,
+		secFrame / 600,
 		canvas.height * 0.25 * 0.75,
 		Point.centerPoint
 	).draw("#CCFF00");
 
 	Vector.makeVector(
-		hourRot / 100,
+		secFrame / 432000,
 		canvas.height * 0.25 * 0.5,
 		Point.centerPoint
 	).draw("#FF00CC");
 
-	secFrame++;
+	secFrame += 1;
 
-	if (secFrame % 3600 == 0) {
-		secFrame = 0;
-	}
+	// if (secFrame % 3600 == 0) {
+	// 	secFrame = 0;
+	// }
 
-	if (undo == true) {
-		minRot--;
-		undo = false;
-	}
+	// if (secFrame % 60 == 0 || secFrame % 60 == 1) {
+	// 	if (undo == true) {
+	// 		minRot--;
+	// 		undo = false;
+	// 	}
+	// 	minRot += 6;
+	// }
 
-	if (secFrame % 60 == 0) {
-		minRot += 6;
-	}
-
-	if (minRot % 3600 == 0) {
-		hourRot += 6;
-	}
-}, 1000 / 60);
+	// if (minRot % 3600 == 0) {
+	// 	hourRot += 6;
+	// }
+}, 1000 / 57);
