@@ -9,10 +9,13 @@ class Clock {}
 const canvas = document.querySelector("#canvas");
 const context = canvas.getContext("2d");
 
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
+
 function drawBG() {
 	context.fillStyle = "#000";
 	context.fillRect(0, 0, canvas.width, canvas.height);
-	for (let i = 0; i <= 360; i += 5) {
+	for (let i = 0; i <= 360; i += 6) {
 		var vector;
 		if (i % 90 == 0) {
 			vector = Vector.makeDistantVector(
@@ -36,9 +39,6 @@ function drawBG() {
 		vector.draw("#777");
 	}
 }
-
-// canvas.width = canvas.width;
-// canvas.height = canvas.height;
 
 class Point {
 	constructor(x, y) {
@@ -172,41 +172,31 @@ secFrame = 0;
 // hourRot = 0;
 
 setInterval(() => {
+	time = new Date();
+	hours = time.getHours() % 12;
+	minutes = time.getMinutes();
+	seconds = time.getSeconds();
+	milis = time.getMilliseconds();
+
 	drawBG();
 
+	console.log(`${hours}:${minutes}:${seconds}:${milis}`);
+
 	Vector.makeVector(
-		secFrame / 10,
+		seconds * 6 + milis / (1000 / 6),
 		canvas.height * 0.25,
 		Point.centerPoint
 	).draw("#00CCFF");
 
 	Vector.makeVector(
-		secFrame / 600,
-		canvas.height * 0.25 * 0.75,
+		minutes * 6 + seconds / 10,
+		canvas.height * 0.25 * 0.875,
 		Point.centerPoint
 	).draw("#CCFF00");
 
 	Vector.makeVector(
-		secFrame / 7200,
-		canvas.height * 0.25 * 0.5,
+		hours * 30 + minutes / 2,
+		canvas.height * 0.25 * 0.75,
 		Point.centerPoint
 	).draw("#FF00CC");
-
-	secFrame += 1;
-
-	// if (secFrame % 3600 == 0) {
-	// 	secFrame = 0;
-	// }
-
-	// if (secFrame % 60 == 0 || secFrame % 60 == 1) {
-	// 	if (undo == true) {
-	// 		minRot--;
-	// 		undo = false;
-	// 	}
-	// 	minRot += 6;
-	// }
-
-	// if (minRot % 3600 == 0) {
-	// 	hourRot += 6;
-	// }
-}, 1000 / 57);
+}, 1);
