@@ -50,6 +50,13 @@ class Point {
 		Math.round(canvas.width / 2),
 		Math.round(canvas.height / 2)
 	);
+
+	static remakeCenterPoint() {
+		this.centerPoint = new Point(
+			Math.round(canvas.width / 2),
+			Math.round(canvas.height / 2)
+		);
+	}
 }
 
 class Vector {
@@ -172,6 +179,21 @@ secFrame = 0;
 // hourRot = 0;
 
 setInterval(() => {
+	// window.onresize = () => {
+	// 	canvas.width = canvas.clientWidth;
+	// 	canvas.height = canvas.clientHeight;
+	// 	Point.remakeCenterPoint();
+	// };
+
+	if (
+		canvas.width != canvas.clientWidth ||
+		canvas.height != canvas.clientHeight
+	) {
+		canvas.width = canvas.clientWidth;
+		canvas.height = canvas.clientHeight;
+		Point.remakeCenterPoint();
+	}
+
 	time = new Date();
 	hours = time.getHours() % 12;
 	minutes = time.getMinutes();
@@ -180,7 +202,7 @@ setInterval(() => {
 
 	drawBG();
 
-	console.log(`${hours}:${minutes}:${seconds}:${milis}`);
+	// console.log(`${hours}:${minutes}:${seconds}:${milis}`);
 
 	Vector.makeVector(
 		seconds * 6 + milis / (1000 / 6),
