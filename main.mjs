@@ -2,7 +2,7 @@
  * @description Before trying to code it in Java I'm doing it in this
  * @author LeviDuncanPixel
  * @package io.github.leviduncanpixel.clock-on-canvas
- * @description JS had problems so here's an empty class
+ * @description here's a class to instantiate the clock
  */
 export class Clock {
 	/**
